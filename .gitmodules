@@ -1,0 +1,3 @@
+[submodule "themes/zola-theme-kurkin"]
+	path = themes/zola-theme-kurkin
+	url = git@github.com:deemson/zola-theme-kurkin.git
