@@ -26,7 +26,7 @@ Look at the first line of the example: even though you pass a string as a second
 implicitly converts the string to a number.
 Similarly, the `*` operator attempts to convert operands to numbers, yielding special values like NaN when unsuccessful.
 
-## Strong Type System
+# Strong Type System
 
 Languages with a strong type system, like **Python**, won't do that:
 
