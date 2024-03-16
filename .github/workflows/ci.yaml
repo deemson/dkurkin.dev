@@ -7,11 +7,17 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: true
-      - name: Download and install zola
+      - name: Cache Zola Installation
+        id: cache-zola
+        with:
+          path: /usr/local/bin/zola
+          key: ${{ runner.os }}-zola
+      - name: Download and Install Zola
+        if: steps.cache-zola.outputs.cache-hit != 'true'
         run: curl --location https://github.com/getzola/zola/releases/download/v0.18.0/zola-v0.18.0-x86_64-unknown-linux-gnu.tar.gz | tar xvzf - -C /usr/local/bin
-      - name: Build zola site
+      - name: Build Zola Site
         run: zola build
-      - name: Upload artifact
+      - name: Upload Built Static Files
         uses: actions/upload-artifact@v4
         with:
           name: site-static-files
@@ -22,9 +28,9 @@ jobs:
     if: ${{ github.ref == 'refs/heads/main' }}
     steps:
       - name: Download built static files
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
-          name: personal-website-files
+          name: site-static-files
       - name: Clean S3 bucket
         run: sh ./scripts/clean-bucket.sh
         env:
