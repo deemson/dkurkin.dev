@@ -2,24 +2,13 @@ name: dkurkin.dev CI
 on: [ push ]
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v2
+      - uses: actions/checkout@v4
         with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-      - name: Build scripts and styles bundle
-        run: npm run build-bundle
-      - name: Build pages
-        run: npx eleventy
-      - name: Upload built static files
-        uses: actions/upload-artifact@v2
-        with:
-          name: personal-website-files
-          path: |
-            output
-            scripts
+          submodules: true
+      - name: Download and install zola
+        run: curl --location https://github.com/getzola/zola/releases/download/v0.18.0/zola-v0.18.0-x86_64-unknown-linux-gnu.tar.gz | tar xvzf - -C /usr/local/bin
   deploy:
     runs-on: ubuntu-latest
     needs: build
