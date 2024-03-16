@@ -2,33 +2,38 @@ name: dkurkin.dev CI
 on: [ push ]
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v2
+      - uses: actions/checkout@v4
         with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-      - name: Build scripts and styles bundle
-        run: npm run build-bundle
-      - name: Build pages
-        run: npx eleventy
-      - name: Upload built static files
-        uses: actions/upload-artifact@v2
+          submodules: true
+      - name: Cache Zola Installation
+        uses: actions/cache@v4
+        id: cache-zola
         with:
-          name: personal-website-files
+          path: /usr/local/bin/zola
+          key: ${{ runner.os }}-zola
+      - name: Download and Install Zola
+        if: steps.cache-zola.outputs.cache-hit != 'true'
+        run: curl --location https://github.com/getzola/zola/releases/download/v0.18.0/zola-v0.18.0-x86_64-unknown-linux-gnu.tar.gz | tar xvzf - -C /usr/local/bin
+      - name: Build Zola Site
+        run: zola build
+      - name: Upload Built Static Files
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-static-files
           path: |
-            output
+            public
             scripts
   deploy:
     runs-on: ubuntu-latest
     needs: build
     if: ${{ github.ref == 'refs/heads/main' }}
     steps:
-      - name: Download built static files
-        uses: actions/download-artifact@v2
+      - name: Download Built Static Files
+        uses: actions/download-artifact@v4
         with:
-          name: personal-website-files
+          name: site-static-files
       - name: Clean S3 bucket
         run: sh ./scripts/clean-bucket.sh
         env:

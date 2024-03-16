@@ -65,6 +65,7 @@ $ ./example
 
 In this example **C** allows adding different types like char and
 to perform this operation it implicitly converts them to compatible types just like a **weak** language would.
+
 Similarly, although **Python** is considered strongly typed, it might still perform implicit conversions in certain scenarios:
 
 ```python
