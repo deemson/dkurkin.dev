@@ -1,0 +1,33 @@
+@import "tailwind.css";
+
+.prose :not(pre) > code {
+    @apply bg-gray-200 before:content-none after:content-none font-normal p-1 rounded;
+}
+
+.ku-content-gap-top {
+    @apply mt-4;
+}
+
+.ku-content-gap-bottom {
+    @apply mb-4;
+}
+
+.ku-content-gap-y {
+    @apply ku-content-gap-top ku-content-gap-bottom;
+}
+
+.ku-content-margin-x {
+    @apply mx-auto;
+}
+
+.ku-content-color {
+    @apply bg-white;
+}
+
+.ku-content-width {
+    @apply max-w-screen-md;
+}
+
+.ku-content-block {
+    @apply md:rounded-xl shadow;
+}

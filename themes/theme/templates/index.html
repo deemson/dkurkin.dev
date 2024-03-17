@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<ul class="ku-content-w">
+    {% for section_path in section.subsections %}
+    {% set subsection = get_section(path=section_path) %}
+    <li class="ku-content-color ku-content-block ku-content-gap-y hover:shadow-gray-500">
+        <a href="{{ subsection.path }}" class="block py-8 px-8">
+            <div class="text-xl">{{ subsection.title }}</div>
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock content %}

@@ -1,0 +1,33 @@
+{
+  "name": "theme",
+  "version": "0.1.0",
+  "description": "",
+  "targets": {
+    "js": {
+      "source": "./src/main.ts",
+      "distDir": "./static"
+    },
+    "styles": {
+      "source": "./src/styles.css",
+      "distDir": "./static"
+    }
+  },
+  "scripts": {
+    "watch": "./node_modules/.bin/parcel watch",
+    "build": "./node_modules/.bin/parcel build"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.10",
+    "@types/alpinejs": "^3.13.6",
+    "autoprefixer": "^10.4.18",
+    "parcel": "^2.11.0",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1"
+  },
+  "dependencies": {
+    "alpinejs": "^3.13.5"
+  }
+}

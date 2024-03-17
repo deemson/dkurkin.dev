@@ -1,0 +1,37 @@
+<header class="shadow py-5">
+    <nav>
+        <ol class="flex items-center space-x-4">
+            {% if current_path == "/" %}
+                <li>
+                    <span class="header-current-color">
+                        {% include "includes/header/home.html" %}
+                    </span>
+                </li>
+            {% else %}
+                {% for ancestor_path in resource.ancestors %}
+                    {% set ancestor_section = get_section(path=ancestor_path) %}
+                    <li>
+                        {% if loop.first %}
+                            <a class="header-link-color" href="/">
+                                {% include "includes/header/home.html" %}
+                            </a>
+                        {% else %}
+                            <div class="flex items-center">
+                                {% include "includes/header/separator.html" %}
+                                <a class="ml-4 header-link-color header-text" href="{{ ancestor_section.path }}">
+                                    {{ ancestor_section.title }}
+                                </a>
+                            </div>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+                <li>
+                    <div class="flex items-center">
+                        {% include "includes/header/separator.html" %}
+                        <span class="ml-4 header-current-color header-text">{{ resource.title }}</span>
+                    </div>
+                </li>
+            {% endif %}
+        </ol>
+    </nav>
+</header>

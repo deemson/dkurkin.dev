@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}{{ section.title }}{% endblock title %}
+{% block content %}
+{% include "includes/breadcrumbs.html" %}
+<ul class="ku-content-w">
+    {% for page in section.pages %}
+    <li class="ku-content-color ku-content-block ku-content-gap-y hover:shadow-gray-500">
+        <a href="{{ page.path }}" class="block py-8 px-8">
+            <div class="text-xl">{{ page.title }}</div>
+            <div class="text-sm text-gray-400">{{ page.date | date(format="%d %b %Y") }}</div>
+            <div class="text-sm mt-4">{{ page.description }}</div>
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock content %}

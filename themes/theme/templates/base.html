@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/styles.css">
+    <title>{% block title %}{% endblock title %}</title>
+    <script defer src="/main.js"></script>
+</head>
+<body class="bg-gray-100">
+{%- if page %}
+    {%- set resource = page %}
+{%- elif section %}
+    {%- set resource = section %}
+{%- endif %}
+<div class="ku-content-margin-x ku-content-width">
+    {% block content %}{% endblock content %}
+    {% include "includes/footer.html" %}
+</div>
+</body>
+</html>

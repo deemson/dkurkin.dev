@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }}{% endblock title %}
+{% block content %}
+{% include "includes/breadcrumbs.html" %}
+<div class="ku-content-color ku-content-width ku-content-block ku-content-gap-y px-8 py-8">
+    <div class="text-5xl font-bold">{{ page.title }}</div>
+    <div class="text-sm text-gray-400 mt-2 mb-8">{{ page.date | date(format="%d %b %Y") }}</div>
+    <div class="prose max-w-none">
+        {{ page.content | safe }}
+    </div>
+</div>
+{% endblock content %}
